@@ -1,0 +1,30 @@
+{
+  "name": "common-rcc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aashishjain07/common-rcc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aashishjain07/common-rcc/issues"
+  },
+  "homepage": "https://github.com/aashishjain07/common-rcc#readme",
+  "dependencies": {
+    "@types/node": "^10.12.18",
+    "body-parser": "^1.18.3",
+    "celebrate": "^9.0.2",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "helmet": "^3.15.0",
+    "mongodb": "^3.1.12",
+    "mongoose": "^5.4.5",
+    "winston": "^3.1.0"
+  }
+}
