@@ -4,9 +4,11 @@ import * as cors from 'cors';
 import * as http from 'http';
 import * as helmet from 'helmet';
 import * as mongoose from 'mongoose';
-//import * as { isCelebrate } from 'celebrate';
 import * as bodyParser from 'body-parser';
-import { DB_CONFIG } from './utility/index';
+
+import  { isCelebrate } from 'celebrate';
+import { validationResponse } from './middlewares/validations';
+import { DB_CONFIG, initGlobals } from './utility/index';
 import { ApiRoutes } from './routes';
 
 class App {
@@ -14,14 +16,13 @@ class App {
     public server;
 
     constructor() {
-        // initGlobals();
+        initGlobals();
         this.app = express();
         this.connectDatabase();
         this.server = new http.Server(this.app);
         this.defineRoutes();
         this.errorHandler();
         this.initConfiguration();
-
     }
 
     private initConfiguration(): void {
@@ -69,18 +70,20 @@ class App {
     }
 
     private errorHandler(): void {
-    // this.app.use((req, res, next, err) => {
-    //     if (isCelebrate(err)) {
-    //         validationResponse(res, err);
-    //     } else {
-    //         global.log('Error -> ', err );
-    //         return res.status(500).json({ code: 500, message: 'Internal Server Error', success: false })
-    //     }
-    // })
+    this.app.use((req, res, next, err) => {
+        if (isCelebrate(err)) {
+            validationResponse(res, err);
+        } else {
+            global.log('Error -> ', err );
+            return res.status(500).json({ code: 500, message: 'Internal Server Error', success: false })
+        }
+    });
     
     }
    
 }
+
+export default new App().server;
 
 
 
