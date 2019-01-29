@@ -1,43 +1,40 @@
-import { BaseRoute } from './base.routes';
-import { userRoutes } from './user';
-
-export class ApiRoutes extends BaseRoute {
-    public static path = '/api';
-    public static instance: ApiRoutes;
-    private constructor() {
-        super()
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const base_routes_1 = require("./base.routes");
+const user_1 = require("./user");
+class ApiRoutes extends base_routes_1.BaseRoute {
+    constructor() {
+        super();
         this.init();
     }
-
     static get router() {
         if (!ApiRoutes.instance) {
             ApiRoutes.instance = new ApiRoutes();
         }
         return ApiRoutes.instance.router;
     }
-
-    private init() {
+    init() {
         this.printRoutes();
         this.setLanguage();
-        this.router.use(userRoutes.path, userRoutes.router)
+        this.router.use(user_1.userRoutes.path, user_1.userRoutes.router);
     }
-
     // print req details
-    private printRoutes() {
+    printRoutes() {
         this.router.use('/', (req, res, next) => {
             res.locals.lang = req.headers.lang ? req.headers.lang : 'EN';
             console.log("\n=============================== NEW REQUEST -> ", req.method, req.originalUrl);
             console.log(req.body);
             console.log("\n===============================");
             next();
-        })
+        });
     }
-
-    private setLanguage() {
+    setLanguage() {
         this.router.use('/', (req, res, next) => {
             res.locals.lang = req.headers.lang ? req.headers.lang : 'EN';
-        next();
+            next();
         });
     }
 }
-
+ApiRoutes.path = '/api';
+exports.ApiRoutes = ApiRoutes;
+//# sourceMappingURL=index.js.map
