@@ -58,7 +58,6 @@ export class ResponseClass {
             message: this.message,
             success: this.success,
             result: this.result,
-
-        })
+        });
     }
 }
