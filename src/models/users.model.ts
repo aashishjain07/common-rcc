@@ -1,6 +1,35 @@
-import * as mongoose from 'mongoose';
+//import * as mongoose from 'mongoose';
 import { Document, model, Model, Schema } from 'mongoose';
 import { ENUM } from '../constants/index';
+
+export interface IUser extends Document {
+    name: String,
+    username: String,
+    email: String,
+    password: String,
+    profileImage: String,
+    gender: String,
+    country: String,
+    timezone: String,
+    status: Number,
+    loggedIn: Boolean,
+    verified: Boolean,
+    isDelete: Boolean,
+    registerationDate: Date,
+    social: userSocial,
+    meta: meta
+}
+export interface userSocial {
+    facebookToken: String,
+    facebookLogin: String,
+    instagramToken: String,
+    instagramLogin: String
+}
+
+export interface meta {
+    tokenData: String,
+    tokenExpiryDate: Date
+}
 
 const schema = new Schema({
     name: {
